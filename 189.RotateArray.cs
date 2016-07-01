@@ -17,7 +17,6 @@ namespace RotateArray
         }
     }
 
-    // solution 1, rotate by copying.
     public class Solution
     {
         /// <summary>
@@ -27,11 +26,16 @@ namespace RotateArray
         {
             if (nums.Length == 0)
                 return;
+            k = k % nums.Length;
             // simply copy elements to proper position in another array.
             int[] rotatedNums = new int[nums.Length];
+            int dest = k;
             for (int index = 0; index != nums.Length; ++index)
             {
-                rotatedNums[(index + k) % nums.Length] = nums[index];
+                rotatedNums[dest] = nums[index];
+                ++dest;
+                if (dest == nums.Length)
+                    dest = 0;
             }
             
             // then copy elements back.
@@ -41,8 +45,7 @@ namespace RotateArray
             }
         }
     }
-    
-    // solution 2, rotate in place.
+
     public class AnotherSolution
     {
         /// <summary>
